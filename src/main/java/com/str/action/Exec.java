@@ -12,8 +12,7 @@ import java.util.stream.IntStream;
 /**
  * Copyright by Renaissance Capital, Ltd.
  *
- * @author <a href="mailto:ext_ograzhdanova@rencredit.ru">Grazhdanova Olga</a>
- * at Jul 14, 2018
+ * @author <a href="mailto:ext_ograzhdanova@rencredit.ru">Grazhdanova Olga</a> at Jul 14, 2018
  */
 public class Exec {
 
@@ -32,7 +31,6 @@ public class Exec {
     private Integer fromArr(int[] arr, Integer summ) {
 
 //        System.out.println(Arrays.toString(arr));
-
         if (arr.length <= 2) {
             return summ;
         }
@@ -42,7 +40,7 @@ public class Exec {
 
         // ----------------------------------
         arr[ind1] = -1;
-        int max2R = IntStream.of(arr)/*.skip(ind1 + 1)*/.summaryStatistics().getMax();
+        int max2R = IntStream.of(arr).summaryStatistics().getMax();
         Integer ind2 = Arrays.stream(arr).boxed().collect(Collectors.toList()).indexOf(max2R);
         arr[ind1] = max1; // magic
         Integer maxMaxInd = Math.max(ind1, ind2);
@@ -54,29 +52,20 @@ public class Exec {
 
 //        System.out.println(">> " + Arrays.toString(forCountArr));;
         Integer sAllSquare = (forCountArr.length) * Math.min(max1, max2R);
-        Integer sFullingSq
-                = //IntStream.of(forCountArr); 
-                Arrays.stream(forCountArr).sum();
+        Integer sFullingSq = Arrays.stream(forCountArr).sum();
 
 //        System.out.println(">> All " + sAllSquare);
 //        System.out.println(">> Only Full " + sFullingSq);
         int diffW = sAllSquare - sFullingSq;
 //        System.out.println(">>>> Diff " + diffW);
+        int[] arrLeft = Arrays.copyOfRange(arr, 0, minMaxInd + 1);
+        int[] arrRight = Arrays.copyOfRange(arr, maxMaxInd, arr.length);
 
-        int[] arr1 = IntStream.of(arr).skip(maxMaxInd).toArray();//boxed().collect(Collectors.toList()).toArray(new Integer[4]);
-
+//        System.out.println("Right: " + Arrays.toString(arrRight));
+//        System.out.println("Left : " + Arrays.toString(arrLeft));
+//        int[] arr1 = IntStream.of(arrLeft).skip(maxMaxInd).toArray();//boxed().collect(Collectors.toList()).toArray(new Integer[4]);
 //        System.out.println(">> New Arr = " + Arrays.toString(arr1));
-        return fromArr(arr1, summ + diffW);
-    }
-
-//    private Integer maxIndex() {
-//
-//        return null;
-//    }
-    class RezHolder {
-
-        int sum;
-        int index;
+        return fromArr(arrLeft, summ + diffW) + fromArr(arrRight, 0);
     }
 
 }
