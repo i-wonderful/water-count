@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.str.action;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * Copyright by Renaissance Capital, Ltd.
- *
- * @author <a href="mailto:ext_ograzhdanova@rencredit.ru">Grazhdanova Olga</a> at Jul 14, 2018
- */
+
 public class Exec {
 
     // 0  1  2 ->3   4  5  6<- 7  8   9
